@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "segmentation-app"
+version = "0.1.0"
+description = "Medical image segmentation toolkit using nnU-Net, PyTorch, and MONAI."
+readme = "README.md"
+authors = [{ name = "IC Test Lab", email = "dev@example.com" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.2",
+    "monai>=1.3",
+    "nnunetv2>=2.2",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "streamlit>=1.32",
+    "numpy>=1.24",
+    "pydantic>=2.5",
+    "scikit-image>=0.22",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.3",
+    "ruff>=0.3",
+    "mypy>=1.8",
+    "pytest>=8.1",
+    "pytest-cov>=4.1",
+    "httpx>=0.27",
+    "types-requests",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I", "B", "UP", "C4"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict = true
+mypy_path = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --disable-warnings"
